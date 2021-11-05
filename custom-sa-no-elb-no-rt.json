@@ -1,5 +1,5 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
         "adminPassword": {
@@ -71,13 +71,13 @@
             }
         },
         "vmSize": {
-            "defaultValue": "Standard_DS8_v2",
+            "defaultValue": "Standard_F8s_v2",
             "allowedValues": [
                 "Standard_DS1_v2",
                 "Standard_DS2_v2",
                 "Standard_DS3_v2",
                 "Standard_DS4_v2",
-		"Standard_DS8_v2",
+                "Standard_DS8_v2",
                 "Standard_D2_v3",
                 "Standard_D4_v3",
                 "Standard_D8_v3",
@@ -88,19 +88,20 @@
                 "Standard_F2s",
                 "Standard_F4s",
                 "Standard_F8s",
+                "Standard_F8s_v2",
                 "Standard_D1_v2",
                 "Standard_D2_v2",
                 "Standard_D3_v2",
-                "Standard_D4_v2"
-		"Standard_D2_v3",
-		"Standard_D4_v3",
-		"Standard_D8_v3",
-		"Standard_D2_v4",
-		"Standard_D4_v4",
-		"Standard_D8_v4",
-		"Standard_D2s_v4",
-		"Standard_D4s_v4",
-		"Standard_D8s_v4",
+                "Standard_D4_v2",
+                "Standard_D2_v3",
+                "Standard_D4_v3",
+                "Standard_D8_v3",
+                "Standard_D2_v4",
+                "Standard_D4_v4",
+                "Standard_D8_v4",
+                "Standard_D2s_v4",
+                "Standard_D4s_v4",
+                "Standard_D8s_v4"
             ],
             "type": "String",
             "metadata": {
@@ -140,7 +141,7 @@
         "nsgName": "[concat(parameters('prefix'),'-NSG')]",
         "vnetID": "[resourceId(parameters('vNetResourceGroup'),'Microsoft.Network/virtualNetworks',parameters('vNetName'))]",
         "subnetRefCGF": "[concat(variables('vnetID'),'/subnets/',parameters('subnetNameCGF'))]",
-        "cgfVmName": "[concat(parameters('prefix'),'NGF')]",
+        "cgfVmName": "[concat(parameters('prefix'),'-SA')]",
         "cgfNicName": "[concat(variables('cgfVmName'),'-NIC')]",
         "cgfPIPAddressName": "[concat(variables('cgfVmName'),'-PIP')]",
         "cgfPIPAddressType": "Static",
