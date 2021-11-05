@@ -10,9 +10,9 @@
         },
         "prefix": {
             "type": "String",
-            "defaultValue": "00GTWS1CGFL",
+            "defaultValue": "00GTWS1CGFL001",
             "metadata": {
-                "description": "Prefix for VMs, ex 00GTWS1CGFL or 20GTWS1CGFL"
+                "description": "Prefix for VMs, ex 00GTWS1CGFL001 or 20GTWS1CGFL002"
             }
         },
         "vNetResourceGroup": {
@@ -153,7 +153,7 @@
         "imageOffer": "barracuda-ng-firewall",
         "vnetID": "[resourceId(parameters('vNetResourceGroup'),'Microsoft.Network/virtualNetworks',parameters('vNetName'))]",
         "subnetRefCGF": "[concat(variables('vnetID'),'/subnets/',parameters('subnetNameCGF'))]",
-        "cgfVmName": "[concat(parameters('prefix'),'001-SA')]",
+        "cgfVmName": "[concat(parameters('prefix'),'-SA')]",
         "cgfNicName": "[concat(variables('cgfVmName'),'-NIC')]",
         "nsgName": "[concat(variables('cgfVmName'),'-NSG')]",
         "cgfPIPAddressName": "[concat(variables('cgfVmName'),'-PIP')]",
