@@ -208,6 +208,9 @@
             "apiVersion": "[variables('networkApiVersion')]",
             "name": "[variables('cgfPIPAddressName')]",
             "location": "[resourceGroup().location]",
+            "zones": [
+                "[parameters('availabilityZone')]"
+            ],
             "properties": {
                 "publicIPAllocationMethod": "[variables('cgfPIPAddressType')]"
             }
