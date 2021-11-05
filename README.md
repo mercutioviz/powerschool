@@ -27,7 +27,7 @@ You can enable programmatic deployment via Powershell using the Cloud Shell feat
 
 
 ## DEPLOY SINGLE INSTANCE FIREWALL
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fntrifiletti%2Fpowerschool%2F470988f38ff6ac714a36f9151b3918d657f6f7b7%2Fcustom-sa-no-elb-no-rt.json" target="_blank">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmercutioviz%2Fpowerschool%2Fmain%2Fcustom-sa-no-elb-no-rt.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png"/>
 </a>
 
@@ -52,7 +52,7 @@ Following resources will be created by these templates:
 
 
 ## DEPLOY HIGH AVAILABILITY CLUSTER
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fntrifiletti%2Fpowerschool%2Fmain%2Fcustom-ha-as-no-elb-no-rt.json" target="_blank">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmercutioviz%2Fpowerschool%2Fmain%2Fcustom-ha-as-no-elb-no-rt.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png"/>
 </a>
 
