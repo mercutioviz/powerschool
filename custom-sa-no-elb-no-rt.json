@@ -10,8 +10,9 @@
         },
         "prefix": {
             "type": "String",
+            "defaultValue": "00GTWS1CGFL",
             "metadata": {
-                "description": "identifying prefix for all VM's being build. e.g WeProd would become WeProd-VM-NGF (Max 19 char, no spaces, [A-Za-z0-9]"
+                "description": "Prefix for VMs, ex 00GTWS1CGFL or 20GTWS1CGFL"
             }
         },
         "vNetResourceGroup": {
@@ -66,9 +67,12 @@
             }
         },
         "version": {
-            "defaultValue": "latest",
+            "defaultValue": "8.0.5034101",
             "allowedValues": [
                 "latest",
+                "8.0.5034101",
+                "8.0.4021801",
+                "8.0.3013701",
                 "8.0.2011901",
                 "8.0.1037602",
                 "8.0.0047504",
@@ -150,7 +154,7 @@
         "nsgName": "[concat(parameters('prefix'),'-NSG')]",
         "vnetID": "[resourceId(parameters('vNetResourceGroup'),'Microsoft.Network/virtualNetworks',parameters('vNetName'))]",
         "subnetRefCGF": "[concat(variables('vnetID'),'/subnets/',parameters('subnetNameCGF'))]",
-        "cgfVmName": "[concat(parameters('prefix'),'-SA')]",
+        "cgfVmName": "[concat(parameters('prefix'),'001-SA')]",
         "cgfNicName": "[concat(variables('cgfVmName'),'-NIC')]",
         "cgfPIPAddressName": "[concat(variables('cgfVmName'),'-PIP')]",
         "cgfPIPAddressType": "Static",
