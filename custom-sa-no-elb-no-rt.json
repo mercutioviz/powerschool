@@ -38,6 +38,15 @@
                 "description": "Network range of the Subnet containing the CloudGen Firewall (e.g. 172.16.136.0/24)"
             }
         },
+    "availabilityZone": {
+      "type": "string",
+      "metadata": {
+        "description": "Availability zone (AZ) number (1, 2, or 3)"
+      },
+      "allowedValues": [
+        "1", "2", "3"
+      ]
+    },
         "ipAddressCGF": {
             "defaultValue": "",
             "type": "String",
@@ -237,6 +246,9 @@
         {
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "[variables('computeApiVersion')]",
+            "zones": [
+                "[parameters('availabilityZone')]"
+            ],
             "name": "[variables('cgfVmName')]",
             "location": "[resourceGroup().location]",
             "dependsOn": [
