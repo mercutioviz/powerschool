@@ -211,6 +211,9 @@
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('cgfNicName1')]",
       "location": "[resourceGroup().location]",
+      "sku": {
+        "name": "standard"
+      },
       "dependsOn": [
         "[concat('Microsoft.Network/publicIPAddresses/', variables('cgfPIPAddressName1'))]"
       ],
