@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
     "adminPassword": {
@@ -58,6 +58,24 @@
         "description": "IP address of the second cgf in the cluster"
       }
     },
+    "availabilityZonecgf1": {
+        "type": "string",
+        "metadata": {
+            "description": "Availability zone (AZ) number (1, 2, or 3) for CGF 1"
+        },
+        "allowedValues": [
+            "1", "2", "3"
+        ]
+    },
+    "availabilityZonecgf2": {
+        "type": "string",
+        "metadata": {
+            "description": "Availability zone (AZ) number (1, 2, or 3) for CGF 2"
+        },
+        "allowedValues": [
+            "1", "2", "3"
+        ]
+    },
     "ccManaged": {
       "type": "string",
       "allowedValues": [
@@ -89,12 +107,11 @@
     "imagePublisher": "barracudanetworks",
     "imageOffer": "barracuda-ng-firewall",
     "nsgName": "[concat(parameters('prefix'),'-NSG-CGF')]",
-    "avName": "[concat(parameters('prefix'),'-AV-CGF')]",
     "vnetID": "[resourceId(parameters('vNetResourceGroup'),'Microsoft.Network/virtualNetworks',parameters('vNetName'))]",
     "subnetRefcgf": "[concat(variables('vnetID'),'/subnets/',parameters('subnetNamecgf'))]",
 
-    "cgfVmName1": "[concat(parameters('prefix'),'-VM-CGF-A')]",
-    "cgfVmName2": "[concat(parameters('prefix'),'-VM-CGF-B')]",
+    "cgfVmName1": "[concat(parameters('prefix'),'-A')]",
+    "cgfVmName2": "[concat(parameters('prefix'),'-B')]",
     "cgfNicName1": "[concat(variables('cgfVmName1'),'-NIC')]",
     "cgfNicName2": "[concat(variables('cgfVmName2'),'-NIC')]",
     "cgfPIPAddressName1": "[concat(variables('cgfVmName1'),'-PIP')]",
@@ -155,20 +172,6 @@
             }
           }
         ]
-      }
-    },    
-    {
-      "apiVersion": "[variables('computeApiVersion')]",
-      "type": "Microsoft.Compute/availabilitySets",
-      "name": "[variables('avName')]",
-      "location": "[resourceGroup().location]",
-      "dependsOn": [],
-      "properties": {
-          "platformFaultDomainCount": 2,
-          "platformUpdateDomainCount": 5                
-      },
-      "sku": {
-        "name": "Aligned"
       }
     },
     {
@@ -247,6 +250,9 @@
     {
       "apiVersion": "[variables('computeApiVersion')]",
       "type": "Microsoft.Compute/virtualMachines",
+      "zones": [
+          "[parameters('availabilityZonecgf1')]"
+      ],
       "name": "[variables('cgfVmName1')]",
       "location": "[resourceGroup().location]",
       "plan": {
@@ -255,13 +261,9 @@
         "Publisher": "[variables('imagePublisher')]"
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Network/networkInterfaces/', variables('cgfNicName1'))]",
-        "[concat('Microsoft.Compute/availabilitySets/', variables('avName'))]"
+        "[resourceId('Microsoft.Network/networkInterfaces/', variables('cgfNicName1'))]"
       ],
       "properties": {
-        "availabilitySet": {
-          "id": "[resourceId('Microsoft.Compute/availabilitySets',variables('avName'))]"
-        },
         "hardwareProfile": {
           "vmSize": "[parameters('vmSize')]"
         },
@@ -300,6 +302,9 @@
       "apiVersion": "[variables('computeApiVersion')]",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[variables('cgfVmName2')]",
+      "zones": [
+          "[parameters('availabilityZonecgf2')]"
+      ],
       "location": "[resourceGroup().location]",
       "plan": {
         "name": "[parameters('imageSKU')]",
@@ -307,13 +312,9 @@
         "Publisher": "[variables('imagePublisher')]"
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Network/networkInterfaces/', variables('cgfNicName2'))]",
-        "[concat('Microsoft.Compute/availabilitySets/', variables('avName'))]"
+        "[resourceId('Microsoft.Network/networkInterfaces/', variables('cgfNicName2'))]"
       ],
       "properties": {
-        "availabilitySet": {
-          "id": "[resourceId('Microsoft.Compute/availabilitySets',variables('avName'))]"
-        },
         "hardwareProfile": {
           "vmSize": "[parameters('vmSize')]"
         },
