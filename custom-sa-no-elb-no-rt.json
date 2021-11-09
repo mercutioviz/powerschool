@@ -15,6 +15,15 @@
                 "description": "Prefix for VMs, ex 00GTWS1CGFL001 or 20GTWS1CGFL002"
             }
         },
+        "CGFName": {
+            "type": "string",
+            "metadata": {
+                "description": "CGF name, e.g. 'SA' or 'A' or 'B'"
+            },
+            "allowedValues": [
+                "SA", "A", "B"
+            ]
+        },
         "vNetResourceGroup": {
             "type": "String",
             "metadata": {
@@ -153,7 +162,7 @@
         "imageOffer": "barracuda-ng-firewall",
         "vnetID": "[resourceId(parameters('vNetResourceGroup'),'Microsoft.Network/virtualNetworks',parameters('vNetName'))]",
         "subnetRefCGF": "[concat(variables('vnetID'),'/subnets/',parameters('subnetNameCGF'))]",
-        "cgfVmName": "[concat(parameters('prefix'),'-SA')]",
+        "cgfVmName": "[concat(parameters('prefix'),'-',parameters('CGFName'))]",
         "cgfNicName": "[concat(variables('cgfVmName'),'-NIC')]",
         "nsgName": "[concat(variables('cgfVmName'),'-NSG')]",
         "cgfPIPAddressName": "[concat(variables('cgfVmName'),'-PIP')]",
