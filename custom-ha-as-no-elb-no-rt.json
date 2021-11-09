@@ -110,8 +110,8 @@
     "vnetID": "[resourceId(parameters('vNetResourceGroup'),'Microsoft.Network/virtualNetworks',parameters('vNetName'))]",
     "subnetRefcgf": "[concat(variables('vnetID'),'/subnets/',parameters('subnetNamecgf'))]",
 
-    "cgfVmName1": "[concat(parameters('prefix'),'-A')]",
-    "cgfVmName2": "[concat(parameters('prefix'),'-B')]",
+    "cgfVmName1": "[concat(parameters('prefix'),'002-A')]",
+    "cgfVmName2": "[concat(parameters('prefix'),'003-B')]",
     "cgfNicName1": "[concat(variables('cgfVmName1'),'-NIC')]",
     "cgfNicName2": "[concat(variables('cgfVmName2'),'-NIC')]",
     "cgfPIPAddressName1": "[concat(variables('cgfVmName1'),'-PIP')]",
